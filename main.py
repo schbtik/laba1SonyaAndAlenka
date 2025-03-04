@@ -66,22 +66,19 @@ def draw_maze():
             elif cell == 'O':  # Енергоджайзери
                 pygame.draw.circle(screen, WHITE, (x * CELL_SIZE + CELL_SIZE // 2, y * CELL_SIZE + CELL_SIZE // 2), 10)
 
-# Основний цикл гри
-running = True
-while running:
-    screen.fill(BLACK)  # Очищення екрану
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-    draw_maze()
-    pygame.display.flip()  # Оновлення екрану
-    clock.tick(60)  # Обмеження FPS
+# Функція для малювання Pac-Man
+def draw_pacman():
+    pygame.draw.circle(screen, YELLOW,
+                       (game.pacman.x * CELL_SIZE + CELL_SIZE // 2, game.pacman.y * CELL_SIZE + CELL_SIZE // 2),
+                       CELL_SIZE // 7)
 
-pygame.quit()
-sys.exit()
 
-# Основний цикл гри
+
+# Функція для малювання привидів
+def draw_ghosts():
+    for ghost in game.ghosts:
+        pygame.draw.rect(screen, ghost.color, (ghost.x * CELL_SIZE, ghost.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
 
 # Основний цикл гри
 running = True
@@ -92,6 +89,8 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     draw_maze()
+    draw_pacman()  # Малюємо Pac-Man
+    draw_ghosts()
     pygame.display.flip()  # Оновлення екрану
     clock.tick(60)  # Обмеження FPS
 
