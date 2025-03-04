@@ -3,6 +3,10 @@ import sys
 from game_state import GameState
 from maze import Maze
 from game_manager import GameManager
+from config import get_game_config
+
+# Отримуємо колір лабіринту з конфіга
+MAZE_COLOR = get_game_config()
 
 # Ініціалізація Pygame
 pygame.init()
@@ -31,14 +35,14 @@ def draw_maze():
     for y, row in enumerate(maze.grid):
         for x, cell in enumerate(row):
             if cell == '#':  # Стіни
-                pygame.draw.rect(screen, BLUE, (x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+                pygame.draw.rect(screen, MAZE_COLOR, (x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             elif cell == '.':  # Точки
                 pygame.draw.circle(screen, WHITE, (x * CELL_SIZE + CELL_SIZE // 2, y * CELL_SIZE + CELL_SIZE // 2), 5)
             elif cell == 'O':  # Енергоджайзери
                 pygame.draw.circle(screen, WHITE, (x * CELL_SIZE + CELL_SIZE // 2, y * CELL_SIZE + CELL_SIZE // 2), 10)
 
 
-#рисуем пакмена самого
+
 # Функція для малювання Pac-Man
 def draw_pacman():
     pygame.draw.circle(screen, YELLOW,
@@ -46,7 +50,6 @@ def draw_pacman():
                        CELL_SIZE // 3)
 
 
-#рисуем привидение
 # Функція для малювання привидів
 def draw_ghosts():
     for ghost in game.ghosts:
@@ -78,7 +81,6 @@ def check_collision_with_ghosts():
                     game.game_over = True  # Якщо немає життів, гра закінчується
 
 
-# Основний цикл гри
 # Основний цикл гри
 running = True
 while running:
