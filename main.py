@@ -26,7 +26,7 @@ maze = Maze()
 game = GameManager(maze)
 game_state = GameState()
 
-#рисуем стены
+# рисуем стены
 import pygame
 import sys
 from game_state import GameState
@@ -55,7 +55,8 @@ maze = Maze()
 game = GameManager(maze)
 game_state = GameState()
 
-#рисуем стены
+
+# рисуем стены
 def draw_maze():
     for y, row in enumerate(maze.grid):
         for x, cell in enumerate(row):
@@ -74,13 +75,12 @@ def draw_pacman():
                        CELL_SIZE // 3)
 
 
-
 # Функція для малювання привидів
 def draw_ghosts():
     for ghost in game.ghosts:
         pygame.draw.rect(screen, ghost.color, (ghost.x * CELL_SIZE, ghost.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
 
-# Основний цикл гри
+
 running = True
 while running:
     screen.fill(BLACK)  # Очищення екрану
@@ -88,9 +88,20 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    draw_maze()
+        elif event.type == pygame.KEYDOWN and not game.game_over:
+            if event.key == pygame.K_UP:
+                game.pacman.move("UP", maze)
+            elif event.key == pygame.K_DOWN:
+                game.pacman.move("DOWN", maze)
+            elif event.key == pygame.K_LEFT:
+                game.pacman.move("LEFT", maze)
+
+    game.update_game()  # Оновлення стану гри
+
+    draw_maze()  # Малюємо лабіринт
     draw_pacman()  # Малюємо Pac-Man
     draw_ghosts()
+
     pygame.display.flip()  # Оновлення екрану
     clock.tick(60)  # Обмеження FPS
 
