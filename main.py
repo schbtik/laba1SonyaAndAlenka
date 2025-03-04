@@ -80,12 +80,17 @@ def draw_ghosts():
     for ghost in game.ghosts:
         pygame.draw.rect(screen, ghost.color, (ghost.x * CELL_SIZE, ghost.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
 
-def draw_score():
+# Функція для відображення рахунку та кількості життів
+def draw_score_and_lives():
     font = pygame.font.Font(None, 36)
 
     # Рахунок
     score_text = font.render(f"Score: {game.pacman.score}", True, WHITE)
     screen.blit(score_text, (10, 10))
+
+    # Кількість життів
+    lives_text = font.render(f"Lives: {game.pacman.lives}", True, WHITE)
+    screen.blit(lives_text, (10, 50))  # Розташування тексту для життів
 
 running = True
 while running:
@@ -111,7 +116,7 @@ while running:
     draw_pacman()  # Малюємо Pac-Man
     draw_ghosts()
 
-    draw_score()
+    draw_score_and_lives()
     pygame.display.flip()  # Оновлення екрану
     clock.tick(60)  # Обмеження FPS
 
