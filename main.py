@@ -80,6 +80,12 @@ def draw_ghosts():
     for ghost in game.ghosts:
         pygame.draw.rect(screen, ghost.color, (ghost.x * CELL_SIZE, ghost.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
 
+def draw_score():
+    font = pygame.font.Font(None, 36)
+
+    # Рахунок
+    score_text = font.render(f"Score: {game.pacman.score}", True, WHITE)
+    screen.blit(score_text, (10, 10))
 
 running = True
 while running:
@@ -94,7 +100,10 @@ while running:
             elif event.key == pygame.K_DOWN:
                 game.pacman.move("DOWN", maze)
             elif event.key == pygame.K_LEFT:
-                game.pacman.move("LEFT", maze)
+                game.pacman.move("LEFT", maze) 
+            elif event.key == pygame.K_RIGHT:
+                game.pacman.move("RIGHT", maze)
+            
 
     game.update_game()  # Оновлення стану гри
 
@@ -102,6 +111,7 @@ while running:
     draw_pacman()  # Малюємо Pac-Man
     draw_ghosts()
 
+    draw_score()
     pygame.display.flip()  # Оновлення екрану
     clock.tick(60)  # Обмеження FPS
 
