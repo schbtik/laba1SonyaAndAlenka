@@ -71,7 +71,7 @@ def draw_maze():
 def draw_pacman():
     pygame.draw.circle(screen, YELLOW,
                        (game.pacman.x * CELL_SIZE + CELL_SIZE // 2, game.pacman.y * CELL_SIZE + CELL_SIZE // 2),
-                       CELL_SIZE // 7)
+                       CELL_SIZE // 3)
 
 
 
