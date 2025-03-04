@@ -92,6 +92,15 @@ def draw_score_and_lives():
     lives_text = font.render(f"Lives: {game.pacman.lives}", True, WHITE)
     screen.blit(lives_text, (10, 50))  # Розташування тексту для життів
 
+# Функція для перевірки зіткнення з привидом
+def check_collision_with_ghosts():
+    for ghost in game.ghosts:
+        if game.pacman.x == ghost.x and game.pacman.y == ghost.y:
+            if game.pacman.lives > 0:  # Якщо є життя для зменшення
+                game.pacman.lives -= 1  # Зменшуємо кількість життів
+                game.pacman.reset_position()  # Оновлюємо позицію Pac-Man (наприклад, на стартову)
+                if game.pacman.lives <= 0:
+                    game.game_over = True  # Якщо немає життів, гра закінчується
 running = True
 while running:
     screen.fill(BLACK)  # Очищення екрану
@@ -109,8 +118,9 @@ while running:
             elif event.key == pygame.K_RIGHT:
                 game.pacman.move("RIGHT", maze)
             
-
+    check_collision_with_ghosts()  # Перевіряємо зіткнення з привидами
     game.update_game()  # Оновлення стану гри
+
 
     draw_maze()  # Малюємо лабіринт
     draw_pacman()  # Малюємо Pac-Man
