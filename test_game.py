@@ -23,7 +23,7 @@ def test_eat_point(maze):
     assert maze.eat_point(2, 1) is True
     assert maze.grid[1][2] == ' '
 
-# Тести для PacMan
+# Тести для класу PacMan
 @pytest.fixture
 def game_manager(maze):
     return GameManager(maze)
