@@ -7,4 +7,4 @@ class Point:
 
     def consume(self):
         """Pac-Man з'їдає точку"""
-        return 10 if not self.is_power_up else 50  # Звичайна точка = 10, енергетична = 50
+        return 10 if not self.is_power_up else 50
