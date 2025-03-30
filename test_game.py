@@ -44,3 +44,14 @@ def test_pacman_reset_position(pacman):
     pacman.move("RIGHT", Maze())
     pacman.reset_position()
     assert (pacman.x, pacman.y) == (1, 1)
+
+ #Тести для Ghost
+@pytest.fixture
+def ghost():
+    return Ghost(6, 5)
+
+def test_ghost_initialization(ghost):
+    assert ghost.x == 6
+    assert ghost.y == 5
+    assert ghost.eatable is False
+
