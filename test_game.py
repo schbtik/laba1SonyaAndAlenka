@@ -55,3 +55,12 @@ def test_ghost_initialization(ghost):
     assert ghost.y == 5
     assert ghost.eatable is False
 
+# Тести для GameState
+@pytest.fixture
+def game_state():
+    return GameState()
+
+def test_game_state_update_score(game_state):
+    game_state.update_score(10)
+    assert game_state.current_score == 10
+
