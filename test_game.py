@@ -64,3 +64,12 @@ def test_game_state_update_score(game_state):
     game_state.update_score(10)
     assert game_state.current_score == 10
 
+# Тести для Point
+@pytest.fixture
+def point():
+    return Point(1, 1)
+
+def test_point_consume(point):
+    assert point.consume() == 10
+    power_point = Point(1, 1, True)
+    assert power_point.consume() == 50
